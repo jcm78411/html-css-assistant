@@ -4,8 +4,12 @@ import requests
 import json
 import os
 import re
-from nltk.tokenize import word_tokenize
 from dotenv import load_dotenv
+import nltk
+nltk.download('punkt_tab')
+nltk.download('punkt')
+from nltk.tokenize import word_tokenize
+
 
 # Load environment variables
 load_dotenv()
