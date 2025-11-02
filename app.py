@@ -112,11 +112,14 @@ def responder(pregunta):
         ]
         return random.choice(respuestas)
 
-# --- Interfaz Gradio ---
-gr.Interface(
-    fn=responder,
-    inputs=gr.Textbox(label="💬 Escribe tu pregunta sobre HTML o CSS"),
-    outputs=gr.Textbox(label="🧠 Respuesta del asistente"),
-    title="Asistente HTML & CSS — OpenRouter",
-    description="Un chatbot especializado en HTML y CSS, potenciado por el modelo LLaMA 3.3 (OpenRouter).",
-).launch(share=True)
+if __name__ == "__main__":
+    import os
+    port = int(os.environ.get("PORT", 7860))  # Render asigna el puerto automáticamente
+    gr.Interface(
+        fn=responder,
+        inputs=gr.Textbox(label="💬 Escribe tu pregunta sobre HTML o CSS"),
+        outputs=gr.Textbox(label="🧠 Respuesta del asistente"),
+        title="Asistente HTML & CSS — OpenRouter",
+        description="Un chatbot especializado en HTML y CSS, potenciado por LLaMA 3.3.",
+    ).launch(server_name="0.0.0.0", server_port=port)
+
