@@ -114,7 +114,8 @@ def responder(pregunta):
 
 if __name__ == "__main__":
     import os
-    port = int(os.environ.get("PORT", 7860))  # Render asigna el puerto automáticamente
+    port = int(os.environ.get("PORT", ""))  # Render asigna el puerto automáticamente
+    print(f"🚀 Iniciando la aplicación en el puerto {port}...")
     gr.Interface(
         fn=responder,
         inputs=gr.Textbox(label="💬 Escribe tu pregunta sobre HTML o CSS"),
