@@ -13,7 +13,6 @@ load_dotenv()
 
 API_KEY = os.getenv("API_KEY")
 OPENROUTER_MODEL = "meta-llama/llama-3.3-70b-instruct:free"
-print("🔑 Clave API cargada:", API_KEY)
 
 # --- Función para consultar el modelo en OpenRouter ---
 def consultar_openrouter(prompt):
@@ -115,7 +114,6 @@ def responder(pregunta):
 if __name__ == "__main__":
     import os
     port = int(os.environ.get("PORT", ""))  # Render asigna el puerto automáticamente
-    print(f"🚀 Iniciando la aplicación en el puerto {port}...")
     gr.Interface(
         fn=responder,
         inputs=gr.Textbox(label="💬 Escribe tu pregunta sobre HTML o CSS"),
