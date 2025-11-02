@@ -119,4 +119,4 @@ gr.Interface(
     outputs=gr.Textbox(label="🧠 Respuesta del asistente"),
     title="Asistente HTML & CSS — OpenRouter",
     description="Un chatbot especializado en HTML y CSS, potenciado por el modelo LLaMA 3.3 (OpenRouter).",
-).launch()
+).launch(share=True)
