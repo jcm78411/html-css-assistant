@@ -247,26 +247,26 @@ def responder(pregunta):
 # -------------------------------------------
 def main(page: ft.Page):
     page.title = "Asistente HTML & CSS"
-    page.window.width = 620
-    page.window.height = 700
+    # page.window.width = 620
+    # page.window.height = 700
     page.window.center()
     page.update()
 
     chat_display = ft.ListView(expand=True, spacing=10, padding=10, auto_scroll=True)
 
-    user_input = ft.TextField(label="Mensaje", expand=False, autofocus=True, width=400)
+    user_input = ft.TextField(label="Mensaje", expand=True, autofocus=True, width=350)
     send_btn = ft.ElevatedButton("Enviar", icon=ft.Icons.SEND)
     clear_btn = ft.ElevatedButton("Limpiar", icon=ft.Icons.DELETE)
 
     # 🌀 Overlay con spinner mientras se genera respuesta
     overlay = ft.Container(
         visible=False,
-        bgcolor=ft.Colors.with_opacity(0.5, ft.Colors.BLACK),
+        bgcolor=ft.Colors.with_opacity(0.1, ft.Colors.BLACK87),
         alignment=ft.alignment.center,
         content=ft.Column(
             [
-                ft.ProgressRing(width=70, height=70, stroke_width=5),
-                ft.Text("🤖 Pensando...", color=ft.Colors.WHITE, size=18, weight="bold"),
+                ft.ProgressRing(width=50, height=50, stroke_width=5),
+                ft.Text("Pensando...", color=ft.Colors.WHITE, size=18, weight="bold"),
             ],
             horizontal_alignment=ft.CrossAxisAlignment.CENTER,
             alignment=ft.MainAxisAlignment.CENTER,
@@ -312,9 +312,10 @@ def main(page: ft.Page):
                         bgcolor=bubble_color,
                         padding=10,
                         border_radius=border,
-                        margin=ft.margin.only(left=10, right=10),
+                        margin=ft.margin.only(left=5, right=5),
                         width=400,
                         shadow=ft.BoxShadow(blur_radius=2, spread_radius=0.5),
+                        expand=True
                     )
                 ],
                 alignment=alignment,
@@ -356,8 +357,8 @@ def main(page: ft.Page):
             ft.Text("🤖 Asistente HTML & CSS", size=22, weight="bold", text_align="center"),
             ft.Container(
                 chat_display,
-                height=300,
-                width=500,
+                height=450,
+                # width=500,
                 bgcolor=ft.Colors.GREY_100,
                 border_radius=10,
                 padding=10,
