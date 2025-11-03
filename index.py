@@ -254,9 +254,9 @@ def main(page: ft.Page):
 
     chat_display = ft.ListView(expand=True, spacing=10, padding=10, auto_scroll=True)
 
-    user_input = ft.TextField(label="Mensaje", expand=True, autofocus=True)
+    user_input = ft.TextField(label="Mensaje", expand=False, autofocus=True, width=400)
     send_btn = ft.ElevatedButton("Enviar", icon=ft.Icons.SEND)
-    clear_btn = ft.ElevatedButton("Limpiar chat", icon=ft.Icons.DELETE)
+    clear_btn = ft.ElevatedButton("Limpiar", icon=ft.Icons.DELETE)
 
     # 🌀 Overlay con spinner mientras se genera respuesta
     overlay = ft.Container(
@@ -356,13 +356,13 @@ def main(page: ft.Page):
             ft.Text("🤖 Asistente HTML & CSS", size=22, weight="bold", text_align="center"),
             ft.Container(
                 chat_display,
-                height=500,
-                width=600,
+                height=300,
+                width=500,
                 bgcolor=ft.Colors.GREY_100,
                 border_radius=10,
                 padding=10,
             ),
-            ft.Row([user_input, ft.Column([send_btn, clear_btn])]),
+            ft.Row([user_input, ft.Column([send_btn, clear_btn])], alignment=ft.MainAxisAlignment.CENTER),
         ],
         horizontal_alignment=ft.CrossAxisAlignment.CENTER,
     )
