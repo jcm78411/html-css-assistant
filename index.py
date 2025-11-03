@@ -357,7 +357,7 @@ def main(page: ft.Page):
             ft.Text("🤖 Asistente HTML & CSS", size=22, weight="bold", text_align="center"),
             ft.Container(
                 chat_display,
-                height=450,
+                height=400,
                 # width=500,
                 bgcolor=ft.Colors.GREY_100,
                 border_radius=10,
