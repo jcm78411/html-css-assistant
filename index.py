@@ -314,8 +314,10 @@ def main(page: ft.Page):
                         border_radius=border,
                         margin=ft.margin.only(left=5, right=5),
                         width=400,
+                        # height=200 * min(1, text.count("\n") / 10 + 0.1),
                         shadow=ft.BoxShadow(blur_radius=2, spread_radius=0.5),
-                        expand=True
+                        expand=True,
+                        expand_loose=True
                     )
                 ],
                 alignment=alignment,
@@ -352,23 +354,43 @@ def main(page: ft.Page):
     user_input.on_submit = send_message
 
     # Estructura visual
+    def update_layout(e=None):
+        chat_container.width = page.width * 0.95     # 80% del ancho de la ventana
+        chat_container.height = page.height * 0.75   # 60% del alto de la ventana
+        page.update()
+    
+    chat_container = ft.Container(
+        chat_display,
+        # bgcolor=ft.Colors.RED,
+        bgcolor=ft.Colors.GREY_100,
+        border_radius=10,
+        padding=10,
+    )
     main_content = ft.Column(
         [
-            ft.Text("🤖 Asistente HTML & CSS", size=22, weight="bold", text_align="center"),
-            ft.Container(
-                chat_display,
-                height=400,
-                # width=500,
-                bgcolor=ft.Colors.GREY_100,
-                border_radius=10,
-                padding=10,
-            ),
+            ft.Text("Asistente HTML & CSS", size=22, weight="bold", text_align="center"),
+            # ft.Container(
+            #     chat_display,
+            #     # height=400 * 0.7,
+            #     # width=500,
+            #     # bgcolor=ft.Colors.GREY_100,
+            #     bgcolor=ft.Colors.RED,
+            #     border_radius=10,
+            #     padding=10,
+            #     expand=True,
+            #     expand_loose=True
+            # ),
+            chat_container,
             ft.Row([user_input, ft.Column([send_btn, clear_btn])], alignment=ft.MainAxisAlignment.CENTER),
         ],
         horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+        expand=True,
+        expand_loose=True
     )
 
     page.add(ft.Stack([main_content, overlay]))
+    page.on_resized = update_layout
+    update_layout()
 
 # 🔹 Iniciar app
 if __name__ == "__main__":
