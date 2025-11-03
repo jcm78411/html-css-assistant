@@ -242,7 +242,22 @@ def responder(pregunta):
     ]
 
     if any(p in texto for p in saludos):
-        return "👋 ¡Hola! Soy un asistente especializado en HTML y CSS. ¿En qué puedo ayudarte?"
+        saludos_resp = [
+            "¡Hola! Soy un asistente especializado en HTML y CSS. ¿En qué puedo ayudarte?",
+            "¡Hola! ¿En qué puedo ayudarte con HTML o CSS?",
+            "¡Buenas! Estoy aquí para ayudarte con tus dudas sobre HTML y CSS.",
+            "¡Hey! ¿Qué necesitas saber sobre HTML o CSS?",
+            "¡Saludos! ¿Cómo puedo asistirte con HTML y CSS hoy?",
+            "¡Hola! Pregunta lo que quieras sobre HTML y CSS.",
+            "¡Buenas! Estoy listo para ayudarte con cualquier consulta sobre HTML y CSS.",
+            "¡Hola! ¿Tienes alguna pregunta sobre HTML o CSS?",
+            "¡Qué tal! Estoy aquí para resolver tus dudas sobre HTML y CSS.",
+            "¡Hola! ¿En qué aspecto de HTML o CSS necesitas ayuda?",
+            "¡Saludos cordiales! ¿Cómo puedo ayudarte con HTML y CSS?",
+            "¡Hola! Estoy a tu disposición para cualquier consulta sobre HTML y CSS.",
+            "¡Buenas! ¿Qué quieres saber sobre HTML o CSS?",
+        ]
+        return random.choice(saludos_resp)
     elif any(p in tokens for p in temas_html_css):
         return consultar_openrouter(pregunta)
     elif any(p in texto for p in agradecimientos):
