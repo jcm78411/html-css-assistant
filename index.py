@@ -40,7 +40,7 @@ def consultar_openrouter(prompt):
         "Authorization": f"Bearer {API_KEY}",
         "Content-Type": "application/json",
         "HTTP-Referer": "https://openrouter.ai",
-        "X-Title": "Asistente HTML & CSS",
+        "X-Title": "Asistente Para HTML & CSS",
     }
 
     # --- cálculo dinámico de tokens ---
@@ -100,9 +100,32 @@ def responder(pregunta):
         "¿cómo va?",
         "¿qué tal estás?",
         "hola, ¿cómo te va?",
+        "hola, ¿qué tal?",
+        "buen día",
+        "buenas noches a todos",
     ]
 
-    # --- Palabras clave HTML/CSS ---
+    agradecimientos = [
+        "gracias",
+        "muchas gracias",
+        "te lo agradezco",
+        "mil gracias",
+        "gracias por tu ayuda",
+        "gracias por la información",
+        "gracias por tu asistencia",
+        "te agradezco mucho",
+        "gracias por todo",
+        "infinitas gracias",
+        "gracias por tu apoyo",
+        "gracias por tu tiempo",
+        "gracias por la respuesta",
+        "gracias por ayudarme",
+        "gracias por la explicación",
+        "gracias por aclararlo",
+        "te lo agradezco mucho",
+        "gracias por tu consejo",
+    ]
+
     temas_html_css = [
         # HTML elementos básicos
         "html",
@@ -217,10 +240,25 @@ def responder(pregunta):
         "sitio",
         "página",
     ]
+
     if any(p in texto for p in saludos):
         return "👋 ¡Hola! Soy un asistente especializado en HTML y CSS. ¿En qué puedo ayudarte?"
     elif any(p in tokens for p in temas_html_css):
         return consultar_openrouter(pregunta)
+    elif any(p in texto for p in agradecimientos):
+        gracias_resp = [
+            "¡De nada! Si tienes más preguntas sobre HTML o CSS, no dudes en preguntar.",
+            "¡Con gusto! Estoy aquí para ayudarte con cualquier duda sobre HTML y CSS.",
+            "¡No hay de qué! Si necesitas más ayuda con HTML o CSS, solo dime.",
+            "¡Para eso estoy! Pregunta lo que necesites sobre HTML y CSS.",
+            "¡Encantado de ayudar! Si tienes más preguntas sobre HTML o CSS, aquí estaré.",
+            "¡A tu servicio! Si surge alguna duda sobre HTML o CSS, no dudes en preguntar.",
+            "¡Siempre dispuesto a ayudar! Pregunta lo que quieras sobre HTML y CSS.",
+            "¡Con mucho gusto! Si tienes más dudas sobre HTML o CSS, solo avísame.",
+            "¡Es un placer ayudar! Si necesitas más información sobre HTML o CSS, aquí estoy.",
+            "¡Estoy aquí para ayudarte! Si tienes más preguntas sobre HTML o CSS, no dudes en preguntar.",
+        ]
+        return random.choice(gracias_resp)
     else:
         respuestas = [
             "Lo siento, estoy capacitado solo para responder preguntas sobre HTML y CSS.",
@@ -246,7 +284,7 @@ def responder(pregunta):
 # Interfaz Flet
 # -------------------------------------------
 def main(page: ft.Page):
-    page.title = "Asistente HTML & CSS"
+    page.title = "Asistente Paar HTML & CSS"
     # page.window.width = 620
     # page.window.height = 700
     page.window.center()
@@ -356,7 +394,7 @@ def main(page: ft.Page):
     # Estructura visual
     def update_layout(e=None):
         chat_container.width = page.width * 0.95     # 80% del ancho de la ventana
-        chat_container.height = page.height * 0.75   # 60% del alto de la ventana
+        chat_container.height = page.height * 0.70   # 60% del alto de la ventana
         page.update()
     
     chat_container = ft.Container(
@@ -368,7 +406,7 @@ def main(page: ft.Page):
     )
     main_content = ft.Column(
         [
-            ft.Text("Asistente HTML & CSS", size=22, weight="bold", text_align="center"),
+            ft.Text("Asistente Para HTML & CSS", size=22, weight="bold", text_align="center"),
             # ft.Container(
             #     chat_display,
             #     # height=400 * 0.7,
@@ -394,7 +432,8 @@ def main(page: ft.Page):
 
 # 🔹 Iniciar app
 if __name__ == "__main__":
-    port = int(os.environ.get("FLET_PORT", ""))
-    ft.app(target=main, view=ft.AppView.WEB_BROWSER, port=port)
+    # port = int(os.environ.get("FLET_PORT", ""))
+    # ft.app(target=main, view=ft.AppView.WEB_BROWSER, port=port)
+    ft.app(target=main, view=ft.AppView.WEB_BROWSER, port=8080)
     # ft.app(target=main)
 
