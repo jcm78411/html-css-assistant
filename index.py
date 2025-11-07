@@ -23,6 +23,7 @@ OPENROUTER_MODEL = "meta-llama/llama-3.3-70b-instruct:free"
 # Función para consultar el modelo en OpenRouter
 # -------------------------------------------
 
+
 def estimate_tokens(text):
     """
     Estima el número de tokens de un texto.
@@ -103,6 +104,15 @@ def responder(pregunta):
         "hola, ¿qué tal?",
         "buen día",
         "buenas noches a todos",
+        "hi",
+        "hello",
+        "greetings",
+        "hey there",
+        "good morning",
+        "hey",
+        "eu",
+        "oe",
+        "wepa"
     ]
 
     agradecimientos = [
@@ -129,123 +139,8 @@ def responder(pregunta):
     with open("tags_and_themes.json", "r", encoding="utf-8") as f:
         temas_html_css = json.load(f)
 
-    print(f"✅ {len(temas_html_css)} temas cargados correctamente.")
-    print(temas_html_css[:10])  # muestra los primeros 10
-
-    # temas_html_css = [
-    #     # HTML elementos básicos
-    #     "html",
-    #     "head",
-    #     "body",
-    #     "title",
-    #     "meta",
-    #     "link",
-    #     "script",
-    #     "style",
-    #     "div",
-    #     "span",
-    #     "p",
-    #     "h1",
-    #     "h2",
-    #     "h3",
-    #     "h4",
-    #     "h5",
-    #     "h6",
-    #     "a",
-    #     "img",
-    #     "ul",
-    #     "ol",
-    #     "li",
-    #     "table",
-    #     "tr",
-    #     "td",
-    #     "th",
-    #     "form",
-    #     "input",
-    #     "button",
-    #     # Atributos comunes
-    #     "class",
-    #     "id",
-    #     "href",
-    #     "src",
-    #     "alt",
-    #     "type",
-    #     "value",
-    #     "placeholder",
-    #     # CSS propiedades
-    #     "css",
-    #     "style",
-    #     "margin",
-    #     "padding",
-    #     "border",
-    #     "width",
-    #     "height",
-    #     "color",
-    #     "background",
-    #     "font-size",
-    #     "font-family",
-    #     "text-align",
-    #     "display",
-    #     "position",
-    #     "float",
-    #     "flex",
-    #     "grid",
-    #     "box-sizing",
-    #     # CSS valores y conceptos
-    #     "absolute",
-    #     "relative",
-    #     "fixed",
-    #     "static",
-    #     "block",
-    #     "inline",
-    #     "flex-box",
-    #     "grid",
-    #     "responsive",
-    #     "media query",
-    #     "selector",
-    #     "px",
-    #     "em",
-    #     "rem",
-    #     "vh",
-    #     "vw",
-    #     "rgb",
-    #     "rgba",
-    #     "hexadecimal",
-    #     # Términos generales
-    #     "etiqueta",
-    #     "propiedad",
-    #     "valor",
-    #     "elemento",
-    #     "contenedor",
-    #     "layout",
-    #     "diseño",
-    #     "maquetación",
-    #     "responsive design",
-    #     "framework",
-    #     "bootstrap",
-    #     "tailwind",
-    #     "flexbox",
-    #     "grid layout",
-    #     "box model",
-    #     "modelo de caja",
-    #     "inspeccionar",
-    #     "devtools",
-    #     "inspector",
-    #     "webkit",
-    #     "moz",
-    #     "compatibilidad",
-    #     "web",
-    #     "navegador",
-    #     "html5",
-    #     "css3",
-    #     "pagina web",
-    #     "sitio web",
-    #     "webpage",
-    #     "website",
-    #     "pagina",
-    #     "sitio",
-    #     "página",
-    # ]
+    # print(f"✅ {len(temas_html_css)} temas cargados correctamente.")
+    # print(temas_html_css[:10])
 
     if any(p in texto for p in saludos):
         saludos_resp = [
@@ -301,6 +196,7 @@ def responder(pregunta):
         ]
         return random.choice(respuestas)
 
+
 # -------------------------------------------
 # Interfaz Flet
 # -------------------------------------------
@@ -308,6 +204,9 @@ def main(page: ft.Page):
     page.title = "Asistente Para HTML & CSS"
     # page.window.width = 620
     # page.window.height = 700
+    # page.theme = ft.Theme(color_scheme_seed=ft.Colors.GREEN)
+    # page.dark_theme = ft.Theme(color_scheme_seed=ft.Colors.BLUE)
+    # page.theme_mode = ft.ThemeMode.SYSTEM  # puede ser LIGHT, DARK o SYSTEM
     page.window.center()
     page.update()
 
@@ -336,32 +235,46 @@ def main(page: ft.Page):
     def add_message(text, is_user=True):
         """Agrega un mensaje con estilo tipo WhatsApp (burbujas asimétricas y soporte Markdown)."""
         if is_user:
-            bubble_color = ft.Colors.LIGHT_BLUE_100
+            # page.theme = ft.Theme(color_scheme_seed=ft.Colors.BLACK)
+            # page.dark_theme = ft.Theme(color_scheme_seed=ft.Colors.BLACK)
+            # bubble_color = ft.Colors.LIGHT_BLUE_100
+            # bubble_color = ft.Colors.BLACK12
+            bubble_color = "#4F8D46"
             alignment = ft.MainAxisAlignment.END
             border = ft.border_radius.only(
                 top_left=15, top_right=15, bottom_left=15, bottom_right=0
             )
             content = ft.Text(
                 text,
-                color=ft.Colors.BLACK,
+                color=ft.Colors.WHITE,
                 selectable=True,
                 size=14,
             )
         else:
-            bubble_color = ft.Colors.BLACK12
+            # page.theme = ft.Theme(color_scheme_seed=ft.Colors.RED)
+            # page.dark_theme = ft.Theme(color_scheme_seed=ft.Colors.RED)
+            # page.theme_mode = ft.ThemeMode.SYSTEM
+            # bubble_color = ft.Colors.BLACK12
+            bubble_color = "#4F8D46"
             alignment = ft.MainAxisAlignment.START
             border = ft.border_radius.only(
                 top_left=15, top_right=15, bottom_left=0, bottom_right=15
             )
-            # 🧠 Mostrar respuesta de la IA con formato Markdown
             content = ft.Markdown(
-                text,
+                value=text,  # 👈 aquí va el string Markdown
                 selectable=True,
-                extension_set="gitHubWeb",  # admite tablas, listas, código, etc.
-                code_theme="atom-one-dark",  # bonito estilo para bloques de código
+                extension_set="gitHubWeb",
+                code_theme="atom-one-dark",
                 auto_follow_links=True,
                 on_tap_link=lambda e: page.launch_url(e.data),
+                md_style_sheet=ft.MarkdownStyleSheet(
+                    p_text_style=ft.TextStyle(color=ft.Colors.WHITE),
+                    strong_text_style=ft.TextStyle(color=ft.Colors.WHITE),
+                    a_text_style=ft.TextStyle(color=ft.Colors.LIGHT_BLUE_200),
+                    code_text_style=ft.TextStyle(color=ft.Colors.LIGHT_GREEN_ACCENT_100),
+                ),
             )
+
 
         chat_display.controls.append(
             ft.Row(
@@ -373,17 +286,15 @@ def main(page: ft.Page):
                         border_radius=border,
                         margin=ft.margin.only(left=5, right=5),
                         width=400,
-                        # height=200 * min(1, text.count("\n") / 10 + 0.1),
-                        shadow=ft.BoxShadow(blur_radius=2, spread_radius=0.5),
+                        shadow=ft.BoxShadow(blur_radius=2, spread_radius=0.5, color="#58B649"),
                         expand=True,
-                        expand_loose=True
+                        expand_loose=True,
                     )
                 ],
                 alignment=alignment,
             )
         )
         chat_display.update()
-
 
     async def send_message(e):
         text = user_input.value.strip()
@@ -414,10 +325,10 @@ def main(page: ft.Page):
 
     # Estructura visual
     def update_layout(e=None):
-        chat_container.width = page.width * 0.95     # 80% del ancho de la ventana
-        chat_container.height = page.height * 0.70   # 60% del alto de la ventana
+        chat_container.width = page.width * 0.95  # 80% del ancho de la ventana
+        chat_container.height = page.height * 0.70  # 60% del alto de la ventana
         page.update()
-    
+
     chat_container = ft.Container(
         chat_display,
         # bgcolor=ft.Colors.RED,
@@ -427,29 +338,24 @@ def main(page: ft.Page):
     )
     main_content = ft.Column(
         [
-            ft.Text("Asistente Para HTML & CSS", size=22, weight="bold", text_align="center"),
-            # ft.Container(
-            #     chat_display,
-            #     # height=400 * 0.7,
-            #     # width=500,
-            #     # bgcolor=ft.Colors.GREY_100,
-            #     bgcolor=ft.Colors.RED,
-            #     border_radius=10,
-            #     padding=10,
-            #     expand=True,
-            #     expand_loose=True
-            # ),
+            ft.Text(
+                "Asistente Para HTML & CSS", size=22, weight="bold", text_align="center"
+            ),
             chat_container,
-            ft.Row([user_input, ft.Column([send_btn, clear_btn])], alignment=ft.MainAxisAlignment.CENTER),
+            ft.Row(
+                [user_input, ft.Column([send_btn, clear_btn])],
+                alignment=ft.MainAxisAlignment.CENTER,
+            ),
         ],
         horizontal_alignment=ft.CrossAxisAlignment.CENTER,
         expand=True,
-        expand_loose=True
+        expand_loose=True,
     )
 
     page.add(ft.Stack([main_content, overlay]))
     page.on_resized = update_layout
     update_layout()
+
 
 # 🔹 Iniciar app
 if __name__ == "__main__":
@@ -457,4 +363,3 @@ if __name__ == "__main__":
     ft.app(target=main, view=ft.AppView.WEB_BROWSER, port=port)
 
     # ft.app(target=main)
-
